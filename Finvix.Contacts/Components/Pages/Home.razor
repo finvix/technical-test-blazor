@@ -1,0 +1,16 @@
+@page "/"
+@using Finvix.Contacts.Services
+@inject IMarkdownService MarkdownService
+
+<PageTitle>Prueba Técnica - Finvix</PageTitle>
+
+@((MarkupString)readmeContent)
+
+@code {
+    private string readmeContent = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        readmeContent = MarkdownService.RenderMarkdown("README.md");
+    }
+}

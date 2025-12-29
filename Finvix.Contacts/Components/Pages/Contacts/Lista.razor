@@ -1,0 +1,56 @@
+@page "/contacts"
+@using Finvix.Contacts.Models
+
+<PageTitle>Contactos - Lista</PageTitle>
+
+<h3>Lista de Contactos</h3>
+
+<div class="mb-3">
+    <a href="/contacts/crear" class="btn btn-primary">Nuevo Contacto</a>
+</div>
+
+<div class="mb-3">
+    <label for="filterCiudad" class="form-label">Filtrar por Ciudad:</label>
+    <select id="filterCiudad" class="form-select" style="max-width: 200px;">
+        <option value="">Todas</option>
+        <option value="Santiago">Santiago</option>
+        <option value="Valparaiso">Valparaiso</option>
+        <option value="Concepcion">Concepcion</option>
+    </select>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Ciudad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in contacts)
+        {
+            <tr>
+                <td>@contact.Id</td>
+                <td>@contact.Nombre</td>
+                <td>@contact.Email</td>
+                <td>@contact.Ciudad</td>
+                <td>
+                    <a href="/contacts/editar/@contact.Id" class="btn btn-sm btn-warning">Editar</a>
+                    <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Contact> contacts = new()
+    {
+        new Contact { Id = 1, Nombre = "Juan Perez", Email = "juan@example.com", Ciudad = "Santiago", Mensaje = "Hola", CreatedAt = DateTime.Now },
+        new Contact { Id = 2, Nombre = "Maria Lopez", Email = "maria@example.com", Ciudad = "Valparaiso", Mensaje = "Consulta", CreatedAt = DateTime.Now },
+        new Contact { Id = 3, Nombre = "Pedro Gonzalez", Email = "pedro@example.com", Ciudad = "Concepcion", Mensaje = "Info", CreatedAt = DateTime.Now }
+    };
+}
